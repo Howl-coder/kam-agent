@@ -134,11 +134,23 @@ with st.sidebar:
         "Ruta del dataset",
         value="data/Rappi_AI_Builder_Challenge_Dataset.xlsx"
     )
-    api_key = st.text_input("Anthropic API Key", value=os.environ.get("ANTHROPIC_API_KEY", ""),type="password", placeholder="sk-ant-...")
+
+    # Leer key del environment pero NO mostrarla en el input
+    env_key = os.environ.get("ANTHROPIC_API_KEY", "")
+
+    if env_key:
+        st.success(" API Key configurada")
+        api_key = env_key  # usa la del secret, no la muestra
+    else:
+        api_key = st.text_input(
+            "Anthropic API Key",
+            type="password",
+            placeholder="sk-ant-..."
+        )
+
     st.divider()
     st.caption("Agente 1 · Árbol de Decisión")
     st.caption("Agente 2 · Claude + Tool Use")
-
 
 # ─── Header ───────────────────────────────────────────────────────────────────
 st.markdown("""
